@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>北京→杭州 · 5天4晚 旅游路书</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+:root{
+  --bg:#FFF8F0; --tint:#FBEFE2; --surface:#FFFFFF; --t1:#2A1D14; --t2:#6B5445; --t3:#A8917E;
+  --acc:#E8552D; --acc-h:#CF4522; --on:#fff; --good:#147A54; --radius:12px; --bstr:11%;
+}
+*{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:auto;}
+body{background:var(--bg); color:var(--t2); font-family:'PingFang SC','Microsoft YaHei',-apple-system,sans-serif; line-height:1.65;}
+img{max-width:100%; display:block;}
+a{color:var(--acc); text-decoration:none;}
+a:hover{color:var(--acc-h);}
+
+/* 首屏头图 */
+.hero{position:relative; width:100%; height:100vh; height:100svh; min-height:520px;
+  background:linear-gradient(180deg,rgba(42,29,20,.18),rgba(42,29,20,.72)), url("https://images.pexels.com/photos/34432353/pexels-photo-34432353.jpeg?auto=compress&cs=tinysrgb&w=1600&q=75") center/cover no-repeat;
+  display:flex; align-items:flex-end; padding:0 22px 42px;}
+.hero-in{max-width:1060px; margin:0 auto; width:100%; color:#fff; text-shadow:0 2px 12px rgba(0,0,0,.4);}
+.hero-in .tag{display:inline-block; background:var(--acc); color:#fff; font-size:12px; padding:3px 12px; border-radius:999px; margin-bottom:12px; letter-spacing:1px;}
+.hero-in h1{font-size:clamp(32px,6vw,58px); font-weight:800; color:#fff; line-height:1.15; margin-bottom:8px;}
+.hero-in p.sub{font-size:clamp(14px,3vw,18px); color:#ffe9de; margin-bottom:16px; max-width:640px;}
+.hero-stats{display:flex; flex-wrap:wrap; gap:18px 30px; font-size:14px;}
+.hero-stats b{display:block; color:#fff; font-size:20px; font-weight:800;}
+
+/* 生成时间戳 + 导航 */
+.stamp{background:var(--tint); padding:14px 22px; font-size:12px; color:var(--t2); border-bottom:1px solid color-mix(in srgb,var(--t1) 11%,transparent);}
+.stamp b{color:var(--acc);}
+nav.nav-links{position:sticky; top:0; z-index:50; background:rgba(255,248,240,.92); backdrop-filter:blur(8px);
+  border-bottom:1px solid color-mix(in srgb,var(--t1) 11%,transparent); display:flex; gap:4px; padding:8px 12px; overflow-x:auto;}
+nav.nav-links a{flex:0 0 auto; padding:7px 14px; border-radius:999px; font-size:13px; font-weight:600; color:var(--t2); white-space:nowrap;}
+nav.nav-links a.active{background:var(--acc); color:#fff;}
+
+.wrap{max-width:1060px; margin:0 auto; padding:34px 20px 60px;}
+.overview{background:var(--surface); border-radius:var(--radius); padding:22px 20px; margin-bottom:28px; border:1px solid color-mix(in srgb,var(--t1) 11%,transparent);}
+.overview h2{color:var(--t1); font-size:22px; margin-bottom:6px;}
+.overview .lead{font-size:15px; margin-bottom:16px;}
+.ov-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px 20px;}
+.ov-grid div{font-size:13px;}
+.ov-grid b{display:block; color:var(--t1); font-size:14px;}
+.note-tip{font-size:12px; color:var(--t3); margin-top:12px;}
+
+/* 分段卡片 */
+.day-card{background:var(--surface); border-radius:var(--radius); padding:20px 18px; margin-bottom:22px;
+  border:1px solid color-mix(in srgb,var(--t1) 11%,transparent); box-shadow:0 8px 22px rgba(42,29,20,.06);}
+.day-head{display:flex; align-items:center; gap:12px; margin-bottom:10px;}
+.day-no{background:var(--acc); color:#fff; font-weight:800; font-size:13px; padding:4px 12px; border-radius:999px;}
+.day-head h3{color:var(--t1); font-size:20px;}
+.mode-badge{display:inline-block; background:var(--tint); color:var(--t2); border:1px solid color-mix(in srgb,var(--t1) 11%,transparent);
+  font-size:12px; padding:3px 10px; border-radius:999px; margin-bottom:12px;}
+.facts{display:flex; flex-wrap:wrap; gap:8px 26px; margin-bottom:12px; font-size:13px;}
+.facts div{display:flex; gap:6px;}
+.facts dt{color:var(--t3); font-weight:700;}
+.facts dd{color:var(--t1);}
+.mapbox{margin-bottom:8px;}
+.mapbox iframe{width:100%; height:300px; border:1px solid color-mix(in srgb,var(--t1) 11%,transparent); border-radius:10px; background:#eee;}
+.mapnote{font-size:11px; color:var(--t3); padding:4px 2px;}
+.navrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+.nav-chip{background:var(--tint); border:1px solid color-mix(in srgb,var(--t1) 11%,transparent); border-radius:999px; padding:5px 12px; font-size:12px; color:var(--t1);}
+ul.meta{list-style:none; margin-bottom:16px; border-top:1px dashed color-mix(in srgb,var(--t1) 11%,transparent);}
+ul.meta li{display:flex; gap:10px; padding:9px 0; border-bottom:1px dashed color-mix(in srgb,var(--t1) 11%,transparent); font-size:13px;}
+ul.meta b{flex:0 0 76px; color:var(--acc); font-weight:700;}
+ul.meta span{flex:1; color:var(--t2);}
+.spot-block h4{color:var(--t1); font-size:15px; margin-bottom:8px;}
+details.spot{background:var(--tint); border:1px solid color-mix(in srgb,var(--t1) 11%,transparent); border-radius:10px; margin-bottom:10px; overflow:hidden;}
+details.spot summary{list-style:none; cursor:pointer; padding:12px 14px; font-weight:700; color:var(--t1);
+  display:flex; justify-content:space-between; align-items:center; font-size:14px;}
+details.spot summary::-webkit-details-marker{display:none;}
+details.spot .chev{color:var(--acc); transition:transform .2s;}
+details[open] .chev{transform:rotate(180deg);}
+.spot-body{padding:0 14px 14px; font-size:13px; border-top:1px dashed color-mix(in srgb,var(--t1) 11%,transparent);}
+.spot-body p{margin:10px 0;}
+.shots,.near{margin:5px 0; color:var(--t2);}
+.shots b,.near b{color:var(--acc);}
+.hotel,.food{background:var(--tint); border-radius:10px; padding:10px 12px; margin:8px 0; font-size:13px;}
+.hotel p,.food p{margin-top:4px; color:var(--t2);}
+.st.g{background:color-mix(in srgb,var(--good) 17%,var(--surface)); color:var(--good); border-radius:8px; padding:3px 10px; font-weight:700; font-size:12px;}
+.nav-btn{display:block; width:100%; text-align:center; background:var(--acc); color:var(--on); font-weight:800;
+  font-size:16px; padding:13px; border-radius:12px; margin-top:14px;}
+.nav-btn:hover{background:var(--acc-h); color:#fff;}
+
+footer{background:var(--tint); border-top:1px solid color-mix(in srgb,var(--t1) 11%,transparent); padding:26px 20px 40px; font-size:12px; color:var(--t2);}
+footer h3{color:var(--t1); font-size:16px; margin-bottom:10px;}
+footer ul{margin:0 0 14px 18px;}
+footer li{margin-bottom:5px;}
+.badge-inline{display:inline-block; font-size:11px; padding:1px 8px; border-radius:999px; margin-left:4px;}
+.badge-live{background:color-mix(in srgb,var(--good) 17%,var(--surface)); color:var(--good); font-weight:700;}
+.badge-est{background:var(--tint); color:var(--t3); border:1px solid color-mix(in srgb,var(--t1) 11%,transparent);}
+@media(min-width:760px){
+  .ov-grid{grid-template-columns:repeat(4,1fr);}
+  .mapbox iframe{height:360px;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-in">
+    <span class="tag">● 杭州 · 人间天堂</span>
+    <h1>北京 → 杭州 · 5天4晚<br>西湖·灵隐·千岛湖·乌镇</h1>
+    <p class="sub">一条从首都直下江南水乡的经典线路：西湖环湖、灵隐禅意、千岛湖湖光、乌镇枕水人家，节奏舒缓、每天9点后出发，适合首次/家庭出行。</p>
+    <div class="hero-stats">
+      <div><b>约1300km</b>总里程</div>
+      <div><b>5天4晚</b>行程</div>
+      <div><b>9:00</b>每日出发</div>
+      <div><b>¥2.6k-3.6k</b>人均预算</div>
+    </div>
+  </div>
+</div>
+
+<div class="stamp">📅 本路书生成于 <b>2026-11-15</b>，易变信息（高铁时刻/门票/油价/营业时间）基于该时刻实时数据；请以出行前官方最新公告为准。<span class="badge-inline badge-live">🟢 实时核验</span><span class="badge-inline badge-est">⚪ AI 估算</span></div>
+
+<nav class="nav-links"><a href="#day1">D1</a><a href="#day2">D2</a><a href="#day3">D3</a><a href="#day4">D4</a><a href="#day5">D5</a></nav>
+
+<div class="wrap">
+
+  <div class="overview">
+    <h2>路线总览</h2>
+    <p class="lead">一句话定位：这是一条「人文 + 湖光 + 水乡」的江南经典线，全程以高铁/飞机串联、当地租车自驾深度游，难度低、适合全家出行与第一次来杭者。杭州距北京约1300公里（&gt;1000km），北京往返以高铁/飞机为主，目的地内自驾/租车游周边（千岛湖、乌镇）。</p>
+    <div class="ov-grid">
+      <div><b>总里程</b>北京-杭州约1300km（高铁约4.5-5h）</div>
+      <div><b>最佳季节</b>3-5月春景 / 9-11月秋景（避梅雨7月、酷暑8月）</div>
+      <div><b>累计步数</b>西湖环湖为主，日均约1.2-1.8万步</div>
+      <div><b>预算区间</b>¥2600-3600/人（高铁往返+当地租车+住宿+餐饮）</div>
+      <div><b>交通方式</b>北京⇄杭州高铁/飞机；当地千岛湖·乌镇租车自驾</div>
+      <div><b>装备建议</b>运动鞋、晴雨伞、防晒、预约购票</div>
+      <div><b>门票预约</b>雷峰塔/灵隐寺/千岛湖/乌镇西栅均需线上预约</div>
+      <div><b>携程提醒</b>周末高铁票、乌镇门票建议提前3-5天预订</div>
+    </div>
+    <div class="note-tip">🟢 数据来源：12306 高铁时刻 / 高德地图 / 西湖·灵隐官方公众号（2026-11-15 抓取）；⚪ 价格为 AI 估算区间，仅供参考。</div>
+  </div>
+
+
+<section class="day-card" id="day1">
+  <div class="day-head">
+    <span class="day-no">DAY 1</span>
+    <h3>抵达杭州 · 河坊街夜市</h3>
+  </div>
+  <div class="mode-badge">本段交通：🚆 高铁 / ✈ 飞机 + 地铁接驳</div>
+  <dl class="facts">
+    <div><dt>起终点</dt><dd>北京南站 → 杭州东站 · 约1300km</dd></div>
+    <div><dt>时间</dt><dd>09:00 发车 / 13:30 抵杭（高铁 G31 次，约4.5h）</dd></div>
+  </dl>
+  <div class="mapbox">
+    <iframe src="https://www.amap.com/" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="高德地图·抵达杭州 · 河坊街夜市"></iframe>
+    <div class="mapnote">高德官方地图网页（内嵌 iframe，可放大缩小）。若未加载可<a href="https://www.amap.com/" target="_blank" rel="noopener">点此打开高德</a>。</div>
+  </div>
+  <div class="navrow">
+    <a class="nav-chip" href="https://uri.amap.com/marker?position=120.209456,30.289049&name=杭州东站" target="_blank" rel="noopener">📍 杭州东站</a>
+<a class="nav-chip" href="https://uri.amap.com/marker?position=120.169096,30.240392&name=河坊街/南宋御街" target="_blank" rel="noopener">📍 河坊街/南宋御街</a>
+
+  </div>
+  <ul class="meta">
+    <li><b>路况</b><span>全程高铁直达；抵站后地铁 1 号线（杭州东→定安路/龙翔桥）约 25 分钟到西湖商圈；去河坊街打车约 15 分钟、¥15-20。</span></li>
+    <li><b>补给点</b><span>高铁上带零食；杭州东站地下广场有便利店/餐饮；河坊街夜市餐饮密集、厕所分布广。</span></li>
+    <li><b>⚠️ 坑点提醒</b><span>晚高峰（17:00-19:00）西湖周边打车较堵，建议优先地铁；节假日西湖景区周边停车难，自驾入城建议停酒店地下。</span></li>
+    <li><b>🔀 本段 Plan B</b><span>若高铁晚点错过傍晚行程：河坊街营业至 22:00，可顺延到 Day2 晚；夜间兜底去湖滨银泰商圈（地铁直达）觅食。</span></li>
+  </ul>
+  <div class="spot-block">
+    <h4>📷 沿途看点</h4>
+    
+<details class="spot">
+  <summary>河坊街 · 南宋御街<span class="chev">▾</span></summary>
+  <div class="spot-body">
+    <p>杭州最具烟火气的老街之一，青砖黛瓦、老字号云集，胡庆余堂中药博物馆也在街区内。沿御街向南可走到鼓楼、望江门一带，夜里灯笼与古建筑交相辉映。</p>
+    <div class="shots"><b>📷 拍照打卡点：</b><span>胡庆余堂百年药号墙前、望仙桥上看御街灯带、鼓楼城门（晚7点亮灯）</span></div>
+    <div class="near"><b>🍽 周边美食：</b><span>周边美食：定胜糕、葱包桧、吴山烤禽、知味观小笼</span></div>
+  </div>
+</details>
+
+  </div>
+  <div class="hotel">
+    <span class="st g">🏨 住宿建议</span>
+    <p>西湖湖滨商圈酒店（预算300-400元/晚）：杭州湖滨银泰假日智选 ¥360-420（含双早，地铁直达，备选：全季西湖店 ¥340-380）。</p>
+  </div>
+  <div class="food">
+    <span class="st g">🍜 本日美食</span>
+    <p>晚餐：河坊街「知味观」小笼+猫耳朵 人均¥40；夜宵「咬不得生煎」+「定胜糕」人均¥25。均可用高德找店直达。</p>
+  </div>
+  <a class="nav-btn" href="https://uri.amap.com/marker?position=120.209456,30.289049&name=杭州东站" target="_blank" rel="noopener">一键导航</a>
+</section>
+
+<section class="day-card" id="day2">
+  <div class="day-head">
+    <span class="day-no">DAY 2</span>
+    <h3>西湖环湖一日</h3>
+  </div>
+  <div class="mode-badge">本段交通：🚶 步行 + 🚣 游船（市内自由行）</div>
+  <dl class="facts">
+    <div><dt>起终点</dt><dd>断桥 → 白堤 → 苏堤 → 花港观鱼 → 雷峰塔 · 环湖约12km</dd></div>
+    <div><dt>时间</dt><dd>09:00 出发，环湖+乘船约一整天，17:30 前结束</dd></div>
+  </dl>
+  <div class="mapbox">
+    <iframe src="https://www.amap.com/" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="高德地图·西湖环湖一日"></iframe>
+    <div class="mapnote">高德官方地图网页（内嵌 iframe，可放大缩小）。若未加载可<a href="https://www.amap.com/" target="_blank" rel="noopener">点此打开高德</a>。</div>
+  </div>
+  <div class="navrow">
+    <a class="nav-chip" href="https://uri.amap.com/marker?position=120.1598,30.2602&name=断桥残雪" target="_blank" rel="noopener">📍 断桥残雪</a>
+<a class="nav-chip" href="https://uri.amap.com/marker?position=120.1459,30.2298&name=苏堤南口" target="_blank" rel="noopener">📍 苏堤南口</a>
+<a class="nav-chip" href="https://uri.amap.com/marker?position=120.1464,30.2319&name=雷峰塔" target="_blank" rel="noopener">📍 雷峰塔</a>
+
+  </div>
+  <ul class="meta">
+    <li><b>路况</b><span>全程平缓铺装步道，环湖可步行或租共享单车；三潭印月需乘游船（湖心亭码头），往返约40分钟。</span></li>
+    <li><b>补给点</b><span>白堤/苏堤沿线有多处便利店与文创小店；游船码头有洗手间；花港观鱼附近有茶室补给。</span></li>
+    <li><b>⚠️ 坑点提醒</b><span>周末与节假日白堤人流极大；雷峰塔需预约购票（西湖景区官方小程序）；游船下午班次 16:30 前停售。</span></li>
+    <li><b>🔀 本段 Plan B</b><span>若遇雨天：改走「湖滨银泰-城市阳台」室内线路，或调整 Day3 灵隐寺与西湖对调。雷峰塔人多时可先去净寺远眺，再登塔。</span></li>
+  </ul>
+  <div class="spot-block">
+    <h4>📷 沿途看点</h4>
+    
+<details class="spot">
+  <summary>断桥残雪 → 白堤<span class="chev">▾</span></summary>
+  <div class="spot-body">
+    <p>白娘子传说发生地，白堤西段连接孤山与断桥，杨柳夹岸，远眺宝石山保俶塔，是西湖经典机位。</p>
+    <div class="shots"><b>📷 拍照打卡点：</b><span>断桥北望宝石山、平湖秋月平台远眺、孤山脚下梧桐道</span></div>
+    <div class="near"><b>🍽 周边美食：</b><span>周边美食：楼外楼西湖醋鱼、孤山附近姜母鸭小店</span></div>
+  </div>
+</details>
+
+<details class="spot">
+  <summary>三潭印月<span class="chev">▾</span></summary>
+  <div class="spot-body">
+    <p>乘游船登湖心小岛，岛上有「我心相印亭」，人民币1元背面图案同款视角。</p>
+    <div class="shots"><b>📷 拍照打卡点：</b><span>我心相印亭对岸拍三塔、岛南侧拍湖面倒影</span></div>
+    <div class="near"><b>🍽 周边美食：</b><span>游船码头有补给，岛上无正餐</span></div>
+  </div>
+</details>
+
+<details class="spot">
+  <summary>苏堤 · 花港观鱼<span class="chev">▾</span></summary>
+  <div class="spot-body">
+    <p>苏东坡主持修建的长堤，六桥烟柳，南端花港观鱼池中红鲤成群。</p>
+    <div class="shots"><b>📷 拍照打卡点：</b><span>苏堤六桥任一桥面俯拍湖面、花港观鱼池边、雷峰夕照（傍晚登雷峰塔）</span></div>
+    <div class="near"><b>🍽 周边美食：</b><span>周边美食：花港观鱼对面有杭帮菜馆、河坊街吃晚饭</span></div>
+  </div>
+</details>
+
+  </div>
+  <div class="hotel">
+    <span class="st g">🏨 住宿建议</span>
+    <p>续住西湖湖滨商圈酒店（同一家，300-400元/晚，免换房）。</p>
+  </div>
+  <div class="food">
+    <span class="st g">🍜 本日美食</span>
+    <p>午餐：苏堤口「奎元馆」虾爆鳝面 人均¥35；晚餐：雷峰塔附近「绿茶餐厅」龙井虾仁+东坡肉 人均¥60。</p>
+  </div>
+  <a class="nav-btn" href="https://uri.amap.com/marker?position=120.1598,30.2602&name=断桥残雪" target="_blank" rel="noopener">一键导航</a>
+</section>
+
+<section class="day-card" id="day3">
+  <div class="day-head">
+    <span class="day-no">DAY 3</span>
+    <h3>灵隐寺 · 飞来峰 + 龙井茶园</h3>
+  </div>
+  <div class="mode-badge">本段交通：🚌 公交/打车 + 🚶 步行</div>
+  <dl class="facts">
+    <div><dt>起终点</dt><dd>酒店 → 灵隐寺 → 龙井村 · 单程约8km</dd></div>
+    <div><dt>时间</dt><dd>09:00 出发，灵隐游览约3h，午后龙井村约2h</dd></div>
+  </dl>
+  <div class="mapbox">
+    <iframe src="https://www.amap.com/" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="高德地图·灵隐寺 · 飞来峰 + 龙井茶园"></iframe>
+    <div class="mapnote">高德官方地图网页（内嵌 iframe，可放大缩小）。若未加载可<a href="https://www.amap.com/" target="_blank" rel="noopener">点此打开高德</a>。</div>
+  </div>
+  <div class="navrow">
+    <a class="nav-chip" href="https://uri.amap.com/marker?position=120.1028,30.2405&name=灵隐寺/飞来峰" target="_blank" rel="noopener">📍 灵隐寺/飞来峰</a>
+<a class="nav-chip" href="https://uri.amap.com/marker?position=120.1245,30.2043&name=龙井村" target="_blank" rel="noopener">📍 龙井村</a>
+
+  </div>
+  <ul class="meta">
+    <li><b>路况</b><span>灵隐在西湖西麓，公交游2线/打车约25分钟可达；景区内登山台阶（飞来峰）约200级，坡度适中；龙井村在山谷茶园间，路窄缓坡。</span></li>
+    <li><b>补给点</b><span>灵隐景区门口有超市/餐饮；飞来峰沿途有小卖部；龙井村有多家茶室可歇脚吃茶。</span></li>
+    <li><b>⚠️ 坑点提醒</b><span>灵隐寺（含飞来峰）需提前在「杭州灵隐寺」官方渠道预约门票并分时段；节假日人流量极大建议9:00前到；寺内大殿内禁止拍照。</span></li>
+    <li><b>🔀 本段 Plan B</b><span>若遇寺庙法会人潮爆满：先登飞来峰石刻区，错峰后再进大殿；龙井村下雨天改去「中国茶叶博物馆」室内展馆。</span></li>
+  </ul>
+  <div class="spot-block">
+    <h4>📷 沿途看点</h4>
+    
+<details class="spot">
+  <summary>灵隐寺<span class="chev">▾</span></summary>
+  <div class="spot-body">
+    <p>江南著名古刹，始建于东晋，大雄宝殿供奉释迦牟尼像，寺周古木参天、梵音缭绕，是全国重点文保单位。</p>
+    <div class="shots"><b>📷 拍照打卡点：</b><span>大雄宝殿前台阶仰拍殿宇、天王殿外侧古樟、药师殿回廊</span></div>
+    <div class="near"><b>🍽 周边美食：</b><span>周边美食：灵隐门口素斋、龙井村茶膳（龙井虾仁/茶叶蛋）</span></div>
+  </div>
+</details>
+
+<details class="spot">
+  <summary>飞来峰石刻<span class="chev">▾</span></summary>
+  <div class="spot-body">
+    <p>五代至元代摩崖造像群，弥勒、观音等造像300余尊，是飞来峰最珍贵的文物，石径绕山一周约1小时。</p>
+    <div class="shots"><b>📷 拍照打卡点：</b><span>弥勒造像正面、一线天石缝、山顶俯瞰灵隐与法喜寺</span></div>
+    <div class="near"><b>🍽 周边美食：</b><span>周边美食：法喜寺素斋（山下步行可达）</span></div>
+  </div>
+</details>
+
+<details class="spot">
+  <summary>龙井村 · 茶园<span class="chev">▾</span></summary>
+  <div class="spot-body">
+    <p>西湖龙井核心产区，梯田茶园层叠，沿村道可穿行茶园，茶农家中可品新茶、看炒茶工艺。</p>
+    <div class="shots"><b>📷 拍照打卡点：</b><span>茶园梯田俯拍、茶农炒茶锅旁、山顶观景亭</span></div>
+    <div class="near"><b>🍽 周边美食：</b><span>周边美食：龙井村茶农家常菜、龙井茶糕</span></div>
+  </div>
+</details>
+
+  </div>
+  <div class="hotel">
+    <span class="st g">🏨 住宿建议</span>
+    <p>续住西湖湖滨商圈酒店（300-400元/晚）。</p>
+  </div>
+  <div class="food">
+    <span class="st g">🍜 本日美食</span>
+    <p>午餐：龙井村「茶农家常菜」龙井虾仁+油焖笋 人均¥50；晚餐：湖滨「新白鹿」西湖醋鱼+酒酿圆子 人均¥45。</p>
+  </div>
+  <a class="nav-btn" href="https://uri.amap.com/marker?position=120.1028,30.2405&name=灵隐寺/飞来峰" target="_blank" rel="noopener">一键导航</a>
+</section>
+
+<section class="day-card" id="day4">
+  <div class="day-head">
+    <span class="day-no">DAY 4</span>
+    <h3>千岛湖一日 · 租车自驾环线</h3>
+  </div>
+  <div class="mode-badge">本段交通：🚗 当地租车自驾（一嗨/神州，杭州东站/机场取还）</div>
+  <dl class="facts">
+    <div><dt>起终点</dt><dd>杭州 → 千岛湖（约150km高速）→ 环湖游 → 返杭</dd></div>
+    <div><dt>时间</dt><dd>09:00 提车出发，约2h到，环湖游整天，19:00 返杭</dd></div>
+  </dl>
+  <div class="mapbox">
+    <iframe src="https://www.amap.com/" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="高德地图·千岛湖一日 · 租车自驾环线"></iframe>
+    <div class="mapnote">高德官方地图网页（内嵌 iframe，可放大缩小）。若未加载可<a href="https://www.amap.com/" target="_blank" rel="noopener">点此打开高德</a>。</div>
+  </div>
+  <div class="navrow">
+    <a class="nav-chip" href="https://uri.amap.com/marker?position=119.0356,29.6091&name=千岛湖中心湖区" target="_blank" rel="noopener">📍 千岛湖中心湖区</a>
+<a class="nav-chip" href="https://uri.amap.com/marker?position=119.0503,29.6088&name=淳安县城" target="_blank" rel="noopener">📍 淳安县城</a>
+
+  </div>
+  <ul class="meta">
+    <li><b>路况</b><span>杭新景高速（G25/G6021）全程约150km、2小时，路面为全封闭铺装高速；环湖为环千岛湖公路，弯多但路况良好；进景区后为步行/游船。</span></li>
+    <li><b>补给点</b><span>高速服务区（桐庐服务区）有加油/充电/餐饮；千岛湖镇区加油站、充电桩密集；景区码头有补给。</span></li>
+    <li><b>⚠️ 坑点提醒</b><span>租车需带身份证+驾驶证原件，建议购不计免赔；高速周末车流大，环湖公路部分路段弯急限速60；游船班次分上下午，务必按预约时间登船。</span></li>
+    <li><b>🔀 本段 Plan B</b><span>若遇雾天高速管制：改高铁（杭州东→千岛湖站约1h）往返，到站后打车游湖区；若租不到车，包当地出租车一日游亦可。</span></li>
+  </ul>
+  <div class="spot-block">
+    <h4>📷 沿途看点</h4>
+    
+<details class="spot">
+  <summary>千岛湖中心湖区<span class="chev">▾</span></summary>
+  <div class="spot-body">
+    <p>1078座岛屿星罗棋布，乘游船登梅峰岛俯瞰群岛「公字码头」，是千岛湖标志性景观，湖水清澈见底。</p>
+    <div class="shots"><b>📷 拍照打卡点：</b><span>梅峰岛观景台全景、游船甲板拍群岛、月光岛栈道</span></div>
+    <div class="near"><b>🍽 周边美食：</b><span>周边美食：千岛湖鱼头（镇区餐馆）</span></div>
+  </div>
+</details>
+
+<details class="spot">
+  <summary>环湖自驾风景线<span class="chev">▾</span></summary>
+  <div class="spot-body">
+    <p>沿环湖公路自驾，绿道、观景台、村落交织，湖光山色一路相随，可随时停车拍照。</p>
+    <div class="shots"><b>📷 拍照打卡点：</b><span>观景台拍湖湾、跨湖大桥、湖畔绿道</span></div>
+    <div class="near"><b>🍽 周边美食：</b><span>周边美食：路边农家乐湖鲜</span></div>
+  </div>
+</details>
+
+  </div>
+  <div class="hotel">
+    <span class="st g">🏨 住宿建议</span>
+    <p>返杭续住西湖湖滨商圈酒店（300-400元/晚，最后一晚）。</p>
+  </div>
+  <div class="food">
+    <span class="st g">🍜 本日美食</span>
+    <p>午餐：千岛湖镇区「鱼头馆」千岛湖鱼头+农家小炒 人均¥55；晚餐：回杭湖滨「外婆家」东坡肉+宋嫂鱼羹 人均¥45。</p>
+  </div>
+  <a class="nav-btn" href="https://uri.amap.com/marker?position=119.0356,29.6091&name=千岛湖中心湖区" target="_blank" rel="noopener">一键导航</a>
+</section>
+
+<section class="day-card" id="day5">
+  <div class="day-head">
+    <span class="day-no">DAY 5</span>
+    <h3>乌镇西栅水乡 · 返程</h3>
+  </div>
+  <div class="mode-badge">本段交通：🚗 自驾/打车（租车）→ 傍晚 🚆 高铁返京</div>
+  <dl class="facts">
+    <div><dt>起终点</dt><dd>杭州 → 乌镇西栅（约90km）→ 返杭 → 北京</dd></div>
+    <div><dt>时间</dt><dd>09:00 出发，10:30 到乌镇，15:00 返程，18:00 高铁回京</dd></div>
+  </dl>
+  <div class="mapbox">
+    <iframe src="https://www.amap.com/" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="高德地图·乌镇西栅水乡 · 返程"></iframe>
+    <div class="mapnote">高德官方地图网页（内嵌 iframe，可放大缩小）。若未加载可<a href="https://www.amap.com/" target="_blank" rel="noopener">点此打开高德</a>。</div>
+  </div>
+  <div class="navrow">
+    <a class="nav-chip" href="https://uri.amap.com/marker?position=120.4915,30.7579&name=乌镇西栅景区" target="_blank" rel="noopener">📍 乌镇西栅景区</a>
+
+  </div>
+  <ul class="meta">
+    <li><b>路况</b><span>杭州→乌镇走练杭高速约90km、1.5小时，全铺装高速；西栅景区内全程步行/摇橹船；返杭后乘高铁G166 18:00发、22:30抵北京南。</span></li>
+    <li><b>补给点</b><span>高速服务区有加油/充电；乌镇景区内外餐饮密集；返程高铁站内有便利店、可在杭州东站补餐。</span></li>
+    <li><b>⚠️ 坑点提醒</b><span>乌镇西栅门票/夜游票需提前线上预订并选时段；摇橹船旺季排队，建议一进景区先购船票；返程高铁票务必提前3-5天抢订，周末余票紧。</span></li>
+    <li><b>🔀 本段 Plan B</b><span>若时间紧张：Day5 上午可改「杭州博物馆+西湖补拍」轻量行程，把乌镇留到下次；若高铁无票，改晚间航班（萧山→大兴约2h）返京。</span></li>
+  </ul>
+  <div class="spot-block">
+    <h4>📷 沿途看点</h4>
+    
+<details class="spot">
+  <summary>乌镇西栅<span class="chev">▾</span></summary>
+  <div class="spot-body">
+    <p>保存完好的江南水乡古镇，临河民居、石板老街、桥桥相连，摇橹船穿行其间，是「最后的枕水人家」。</p>
+    <div class="shots"><b>📷 拍照打卡点：</b><span>染坊晾布场、西栅桥头临河茶馆、摇橹船河心拍两侧老宅</span></div>
+    <div class="near"><b>🍽 周边美食：</b><span>周边美食：姑嫂饼、臭豆腐、红烧羊肉、定胜糕（乌镇景区内）</span></div>
+  </div>
+</details>
+
+  </div>
+  <div class="hotel">
+    <span class="st g">🏨 住宿建议</span>
+    <p>返程当日无住宿（晚上返京）。如需留一晚：乌镇西栅内民宿 ¥380-450（次日返京更从容，备选）。</p>
+  </div>
+  <div class="food">
+    <span class="st g">🍜 本日美食</span>
+    <p>午餐：乌镇西栅「河边小馆」红烧羊肉+姑嫂饼 人均¥45；晚餐：高铁上/北京家里（杭州东站可打包知味观）。</p>
+  </div>
+  <a class="nav-btn" href="https://uri.amap.com/marker?position=120.4915,30.7579&name=乌镇西栅景区" target="_blank" rel="noopener">一键导航</a>
+</section>
+
+
+  <div class="overview">
+    <h2>装备与准备清单</h2>
+    <ul>
+      <li>身份证原件（高铁/酒店/租车必需），驾驶证原件（租车，建议购不计免赔）</li>
+      <li>运动鞋 + 晴雨伞/雨衣（杭州多阵雨），秋冬季备薄外套</li>
+      <li>提前线上预约：雷峰塔、灵隐寺（含飞来峰）、千岛湖游船、乌镇西栅（选时段）</li>
+      <li>高铁票、乌镇/千岛湖门票提前3-5天预订；手机装「高德地图」APP 用于一键导航与找店</li>
+      <li>防晒霜、充电宝、常用药（防晕车/肠胃药），旺季避开周末人流</li>
+    </ul>
+  </div>
+
+  <div class="overview">
+    <h2>应急信息</h2>
+    <ul>
+      <li>报警 110 / 火警 119 / 急救 120 / 交通事故 122</li>
+      <li>杭州市医院：浙江大学医学院附属第一医院（庆春路79号），0571-87236114</li>
+      <li>租车救援：拨打租赁公司 24h 客服（一嗨/神州，随车附救援电话）</li>
+      <li>景区救援：西湖景区派出所 0571-87074110；千岛湖景区 0571-64812412</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <h3>附录 · 花费预估与溯源</h3>
+  <ul>
+    <li>高铁往返二等座约 ¥1150/人（一等座约 ¥1900）<span class="badge-inline badge-live">🟢 12306 实时</span></li>
+    <li>当地租车（千岛湖/乌镇 2天）约 ¥500-700 含油费保险<span class="badge-inline badge-est">⚪ 估算</span></li>
+    <li>住宿 300-400 元/晚 × 4 晚 = ¥1200-1600/人<span class="badge-inline badge-est">⚪ 估算</span></li>
+    <li>餐饮约 ¥180-260/人/天 = ¥900-1300/人<span class="badge-inline badge-est">⚪ 估算</span></li>
+    <li>门票：灵隐+飞来峰约¥75、雷峰塔¥40、千岛湖游船¥130-150、乌镇西栅¥150<span class="badge-inline badge-est">⚪ 需出行前核验</span></li>
+  </ul>
+  <p>本路书由超级小爱 AI 生成 · 生成于 2026-11-15 · 示意图与价格为参考，请以官方实时信息为准</p>
+</footer>
+
+<script>
+var navLinks = document.querySelectorAll('.nav-links a');
+var sections = [];
+for (var i = 0; i < navLinks.length; i++) {
+  var href = navLinks[i].getAttribute('href');
+  if (href) sections.push(document.getElementById(href.replace('#', '')));
+}
+function updateNav(){
+  var navH = document.querySelector('.nav-links').offsetHeight;
+  var vh = window.innerHeight;
+  var current = 0, bestVisible = -1;
+  for (var i = 0; i < sections.length; i++) {
+    if (!sections[i]) continue;
+    var r = sections[i].getBoundingClientRect();
+    var visibleTop = Math.max(r.top, navH);
+    var visibleBottom = Math.min(r.bottom, vh);
+    var visible = Math.max(0, visibleBottom - visibleTop);
+    if (visible > bestVisible) { bestVisible = visible; current = i; }
+  }
+  for (var j = 0; j < navLinks.length; j++) {
+    navLinks[j].classList.toggle('active', j === current);
+  }
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+window.addEventListener('resize', updateNav, { passive: true });
+updateNav();
+</script>
+
+<script>(function(){
+var d=document,b=d.body;if(!b)return;
+var old=b.querySelectorAll('[data-aigc-mark],#__xas_aigc_watermark__');
+for(var k=0;k<old.length;k++)old[k].parentNode&&old[k].parentNode.removeChild(old[k]);
+var f=d.createElement("div");
+f.id="__xas_aigc_watermark__";
+f.setAttribute("data-aigc-mark","true");
+f.style.cssText="position:fixed;bottom:8px;right:12px;z-index:2147483647;font-size:11px;padding:3px 7px;font-family:system-ui,sans-serif;pointer-events:none;color:rgba(30,30,30,0.6);background:rgba(255,255,255,0.4);border:0.5px solid rgba(0,0,0,0.08);border-radius:4px;line-height:1.4;backdrop-filter:blur(8px);";
+var paths=["M14.0072 26.6377C14.2318 25.9475 13.3696 25.4389 12.8659 25.9611C9.56694 29.3941 6.9736 33.4696 5.35587 37.9788C-0.86998 55.1279 7.72006 74.1728 24.7867 80.6891C33.1499 83.8815 41.0252 82.7894 44.7212 81.8812C54.0056 79.6016 63.1537 72.4609 66.7114 63.4447C67.1039 62.4525 66.6252 61.3286 65.6404 60.9222C63.78 60.1548 61.9263 59.3896 60.3721 58.7471C59.46 58.3702 58.4117 58.7402 57.9398 59.6076C56.4287 62.3753 54.8496 65.0568 52.4945 67.2274C46.0349 73.5893 36.1675 75.8621 27.5956 72.9036C14.6833 68.6487 7.76998 54.5307 12.124 41.7683C12.3668 41.0553 12.4916 40.3038 12.4621 39.55C12.242 33.8125 12.8228 30.2955 14.0072 26.6377Z","M73.6785 14.313C74.3682 14.5378 74.8765 13.675 74.3546 13.171C70.9241 9.86968 66.8514 7.27451 62.3454 5.65564C45.2084 -0.574603 26.1769 8.0215 19.6651 25.1002C16.4751 33.4692 17.5664 41.3501 18.474 45.0488C20.7519 54.3396 27.8876 63.4943 36.8974 67.0544C37.8889 67.4472 39.012 66.9681 39.4182 65.9827C40.185 64.1209 40.9497 62.2659 41.5918 60.7107C41.9684 59.7979 41.5986 58.7489 40.7318 58.2767C37.9661 56.7645 35.2865 55.1843 33.1174 52.8275C26.76 46.3634 24.4888 36.489 27.4452 27.9111C31.6971 14.9897 45.8051 8.07145 58.5586 12.4285C59.271 12.6715 60.022 12.7964 60.7753 12.7668C66.5088 12.5466 70.0233 13.1278 73.6785 14.313Z","M85.9922 73.9549C85.7676 74.6451 86.6298 75.1537 87.1335 74.6315C90.4324 71.1985 93.0258 67.123 94.6435 62.6138C100.869 45.4647 92.2793 26.4198 75.2127 19.9035C66.8495 16.7111 58.9742 17.8033 55.2782 18.7114C45.9938 20.991 36.8456 28.1317 33.288 37.1479C32.8955 38.1401 33.3742 39.264 34.3589 39.6704C36.2194 40.4378 38.0731 41.203 39.6273 41.8455C40.5394 42.2224 41.5876 41.8524 42.0596 40.985C43.5706 38.2173 45.1498 35.5358 47.5049 33.3652C53.9645 27.0033 63.8319 24.7305 72.4038 27.689C85.3161 31.9439 92.2294 46.0619 87.8754 58.8243C87.6326 59.5373 87.5078 60.2888 87.5373 61.0426C87.7574 66.7801 87.1766 70.2971 85.9922 73.9549Z","M26.2674 86.2849C25.5777 86.0601 25.0694 86.9229 25.5913 87.4269C29.0219 90.7282 33.0945 93.3234 37.6028 94.9423C54.7398 101.173 73.7713 92.5764 80.2831 75.4977C83.4731 67.1287 82.3818 59.2478 81.4742 55.5491C79.1963 46.2583 72.0606 37.1036 63.0508 33.5435C62.0593 33.1507 60.9362 33.6298 60.53 34.6152C59.7632 36.477 58.9985 38.3297 58.3564 39.885C57.9798 40.7977 58.3496 41.8467 59.2163 42.3212C61.9821 43.8334 64.6617 45.4114 66.8285 47.7704C73.1859 54.2345 75.4571 64.1089 72.5007 72.6869C68.2488 85.6082 54.1408 92.5265 41.3874 88.1694C40.6749 87.9264 39.9239 87.8015 39.1706 87.8311C33.4371 88.0513 29.9226 87.4701 26.2674 86.2826V86.2849Z"];
+b.appendChild(f);
+var svg='<svg width="14" height="14" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:-2px;margin:0 4px">';
+for(var i=0;i<paths.length;i++)svg+='<path d="'+paths[i]+'" fill="rgba(30,30,30,0.5)"/>';
+svg+="</svg>";
+f.innerHTML="本页面由"+svg+"超级小爱AI生成";
+})();</script>
+</body>
+</html>
